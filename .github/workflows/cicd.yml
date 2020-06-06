@@ -1,0 +1,16 @@
+on: [push,pull_request]
+jobs:
+  cicd-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: run script
+        run: ./ci.sh
+        env:
+          super_secret: ${{ secrets.SUPERSECRET }}
+
+      - name: try inline exposure
+        env:
+          super_secret: ${{ secrets.SUPERSECRET }}
+        run: |
+          echo $super_secret
